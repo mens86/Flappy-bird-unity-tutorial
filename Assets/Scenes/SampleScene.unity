@@ -1956,8 +1956,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1896738525}
   - component: {fileID: 1896738526}
+  - component: {fileID: 1896738527}
   m_Layer: 0
-  m_Name: Pipe Spawner
+  m_Name: Object Spawner
   m_TagString: PipeSpawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1990,9 +1991,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50c2fd8e8736d6d40aec7b46bd675d3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  pipe: {fileID: 2032340249119012949, guid: 880af6ad9b336064fb284a8b21ef7167, type: 3}
-  spawnRate: 3
+  obj: {fileID: 2032340249119012949, guid: 880af6ad9b336064fb284a8b21ef7167, type: 3}
+  spawnRate: 4
   heightOffset: 15.39
+--- !u!114 &1896738527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1896738524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50c2fd8e8736d6d40aec7b46bd675d3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectSpawnScript
+  obj: {fileID: 8324067144739061756, guid: 785891fed13865d4f88952519acd85fa, type: 3}
+  spawnRate: 2
+  heightOffset: 20
 --- !u!1 &1939567402
 GameObject:
   m_ObjectHideFlags: 0
