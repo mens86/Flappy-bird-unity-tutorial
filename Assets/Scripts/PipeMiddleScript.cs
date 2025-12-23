@@ -20,7 +20,7 @@ public class PipeMiddleScript : MonoBehaviour
 
         if (collision.gameObject.layer == 3) // il layer del bird
         {
-            logic.AddScore(1);
+            logic.AddWeek(1);
         }
     }
 }

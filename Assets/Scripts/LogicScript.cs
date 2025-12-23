@@ -5,11 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class LogicScript : MonoBehaviour
 {
-    public int playerScore;
-    public TextMeshProUGUI scoreText;
+    public int passedWeeks;
+    public int monthLenght = 2;
+    private int indexOfCurrentMonth = 0;
+    private string[] monthNames = { "Settembre", "Ottobre", "Novembre", "Dicembre", "Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno" };
+    public TextMeshProUGUI currentMonth;
     public GameObject gameOverScreen;
     public BirdScript bird;
-    public GameObject pauseMenu; // Trascina qui il tuo pannello UI nell'Inspector
+    public GameObject pauseMenu;
+    public GameObject winScreen;
     private bool gameIsPaused = false;
 
     public List<int> grades = new List<int>();
@@ -27,14 +31,29 @@ public class LogicScript : MonoBehaviour
         }
     }
 
-    public void AddScore(int score)
+    public void AddWeek(int week)
     {
         if (bird.birdIsAlive)
         {
-            playerScore += score;
-            scoreText.text = playerScore.ToString();
+            passedWeeks += week;
+            if (passedWeeks == monthLenght)
+            {
+                if (indexOfCurrentMonth < 9)
+                {
+                    passedWeeks = 0;
+                    indexOfCurrentMonth += 1;
+                    currentMonth.text = monthNames[indexOfCurrentMonth];
+                }
+                else
+                {
+                    Time.timeScale = 0;
+                    winScreen.SetActive(true);
+                }
+
+            }
         }
     }
+
     public void AddGradeToMean(int grade)
     {
         grades.Add(grade);
@@ -50,6 +69,7 @@ public class LogicScript : MonoBehaviour
 
     public void RestartGame()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("SampleScene");
     }
 
