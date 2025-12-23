@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,6 +11,9 @@ public class LogicScript : MonoBehaviour
     public BirdScript bird;
     public GameObject pauseMenu; // Trascina qui il tuo pannello UI nell'Inspector
     private bool gameIsPaused = false;
+
+    public List<int> grades = new List<int>();
+    public TextMeshProUGUI mean;
 
     void Update()
     {
@@ -30,6 +34,18 @@ public class LogicScript : MonoBehaviour
             playerScore += score;
             scoreText.text = playerScore.ToString();
         }
+    }
+    public void AddGradeToMean(int grade)
+    {
+        grades.Add(grade);
+        float gradeSum = 0;
+        float numberOfGrades = 0;
+        foreach (var g in grades)
+        {
+            numberOfGrades += 1;
+            gradeSum += g;
+        }
+        mean.text = "media: " + (gradeSum / numberOfGrades).ToString("F1");
     }
 
     public void RestartGame()

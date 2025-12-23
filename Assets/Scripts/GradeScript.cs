@@ -5,6 +5,7 @@ public class GradeScript : MonoBehaviour
     public Sprite[] voti;
     public SpriteRenderer spriteRenderer;
     public int gradeNumber;
+    public LogicScript logicScript;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -13,6 +14,7 @@ public class GradeScript : MonoBehaviour
         int randomIndex = Random.Range(0, 8);
         gradeNumber = randomIndex + 3;
         spriteRenderer.sprite = voti[randomIndex];
+        logicScript = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
     }
 
     // Update is called once per frame
@@ -26,6 +28,7 @@ public class GradeScript : MonoBehaviour
 
         if (collision.gameObject.layer == 3) // il layer del bird
         {
+            logicScript.AddGradeToMean(gradeNumber);
             Destroy(gameObject);
         }
     }
