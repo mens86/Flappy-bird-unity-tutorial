@@ -28,5 +28,5 @@ public class BirdScript : MonoBehaviour
     {
         logic.GameOver();
     }
-
+    //prova
 }
