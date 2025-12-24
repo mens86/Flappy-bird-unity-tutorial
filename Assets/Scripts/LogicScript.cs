@@ -13,11 +13,19 @@ public class LogicScript : MonoBehaviour
     public GameObject gameOverScreen;
     public BirdScript bird;
     public GameObject pauseMenu;
-    public GameObject winScreen;
+    public GameObject endOfLevel;
     private bool gameIsPaused = false;
-
     public List<int> grades = new List<int>();
-    public TextMeshProUGUI mean;
+    public float mean;
+    public TextMeshProUGUI meanText;
+    public float behaviour;
+    public TextMeshProUGUI behaviourText;
+    public TextMeshProUGUI endOfLevelTitleText;
+    public TextMeshProUGUI endOfLevelSubtitleText;
+    public TextMeshProUGUI endOfLevelBodyText;
+
+
+
 
     void Update()
     {
@@ -46,11 +54,29 @@ public class LogicScript : MonoBehaviour
                 }
                 else
                 {
-                    Time.timeScale = 0;
-                    winScreen.SetActive(true);
+                    EndOfLevel();
                 }
-
             }
+        }
+    }
+    public void EndOfLevel()
+    {
+        Time.timeScale = 0;
+        gameIsPaused = true;
+        endOfLevel.SetActive(true);
+        if (behaviour > 5)
+        {
+            endOfLevelTitleText.text = "Promosso!";
+            endOfLevelBodyText.color = new Color32(39, 241, 6, 255);
+            endOfLevelSubtitleText.text = "E vai!";
+            endOfLevelBodyText.text = "Media dei voti: " + mean.ToString("F1") + "\nCondotta: " + behaviour + "\nMedia totale: " + ((mean + behaviour) / 2).ToString("F1");
+        }
+        else
+        {
+            endOfLevelTitleText.text = "Bocciato!";
+            endOfLevelTitleText.color = new Color32(241, 40, 6, 255);
+            endOfLevelSubtitleText.text = "troppe assenze strategiche: devi farti interrogare di più!";
+            endOfLevelBodyText.text = "Media dei voti: " + mean.ToString("F1") + "\nCondotta: " + behaviour + "\nMedia totale: " + ((mean + behaviour) / 2).ToString("F1");
         }
     }
 
@@ -64,12 +90,20 @@ public class LogicScript : MonoBehaviour
             numberOfGrades += 1;
             gradeSum += g;
         }
-        mean.text = "media: " + (gradeSum / numberOfGrades).ToString("F1");
+        if (numberOfGrades < 10)
+        {
+            behaviour = numberOfGrades;
+            behaviourText.text = "Condotta: " + numberOfGrades.ToString();
+        }
+        mean = gradeSum / numberOfGrades;
+        meanText.text = "Media dei voti: " + mean.ToString("F1");
     }
+
 
     public void RestartGame()
     {
         Time.timeScale = 1;
+        gameIsPaused = false;
         SceneManager.LoadScene("SampleScene");
     }
 
