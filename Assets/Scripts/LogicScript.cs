@@ -64,6 +64,7 @@ public class LogicScript : MonoBehaviour
         Time.timeScale = 0;
         gameIsPaused = true;
         endOfLevel.SetActive(true);
+        AudioManager.instance.PlayMusic("ScoreScreen");
         if (behaviour > 5)
         {
             endOfLevelTitleText.text = "Promosso!";
@@ -105,6 +106,7 @@ public class LogicScript : MonoBehaviour
         Time.timeScale = 1;
         gameIsPaused = false;
         SceneManager.LoadScene("SampleScene");
+        AudioManager.instance.PlayMusic("Level");
     }
 
     public void GameOver()
