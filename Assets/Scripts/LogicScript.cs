@@ -23,6 +23,9 @@ public class LogicScript : MonoBehaviour
     public TextMeshProUGUI endOfLevelTitleText;
     public TextMeshProUGUI endOfLevelSubtitleText;
     public TextMeshProUGUI endOfLevelBodyText;
+    public SpriteRenderer birdSprite;
+    public Sprite idleBird;
+    public Sprite deadBird;
 
 
 
@@ -112,6 +115,8 @@ public class LogicScript : MonoBehaviour
     public void GameOver()
     {
         bird.birdIsAlive = false;
+        bird.animator.enabled = false;
+        birdSprite.sprite = deadBird;
         gameOverScreen.SetActive(true);
     }
 
