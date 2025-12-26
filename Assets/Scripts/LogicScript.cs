@@ -26,6 +26,8 @@ public class LogicScript : MonoBehaviour
     public SpriteRenderer birdSprite;
     public Sprite idleBird;
     public Sprite deadBird;
+    public PlayerStats playerStats;
+    public GameObject nextLevelButton;
 
 
 
@@ -70,10 +72,25 @@ public class LogicScript : MonoBehaviour
         AudioManager.instance.PlayMusic("ScoreScreen");
         if (behaviour > 5)
         {
-            endOfLevelTitleText.text = "Promosso!";
-            endOfLevelBodyText.color = new Color32(39, 241, 6, 255);
-            endOfLevelSubtitleText.text = "E vai!";
-            endOfLevelBodyText.text = "Media dei voti: " + mean.ToString("F1") + "\nCondotta: " + behaviour + "\nMedia totale: " + ((mean + behaviour) / 2).ToString("F1");
+            nextLevelButton.SetActive(true);
+            PlayerStats.instance.AddToMean(mean);
+
+            if (PlayerStats.instance.currentLevel == 6)
+            {
+                endOfLevelTitleText.text = "Finalmente maturo!";
+                endOfLevelBodyText.color = new Color32(39, 241, 6, 255);
+                endOfLevelSubtitleText.text = "\nÈ stata dura ma ce l'hai fatta!";
+                endOfLevelBodyText.text = "Voto dell'esame di stato: " + Mathf.RoundToInt(PlayerStats.instance.finalGrade);
+            }
+            else
+            {
+                endOfLevelTitleText.text = "Promosso!";
+                endOfLevelBodyText.color = new Color32(39, 241, 6, 255);
+                endOfLevelSubtitleText.text = "E vai!";
+                endOfLevelBodyText.text = "Media dei voti: " + mean.ToString("F1") + "\nCondotta: " + behaviour + "\nMedia totale: " + ((mean + behaviour) / 2).ToString("F1");
+
+            }
+
         }
         else
         {
@@ -94,7 +111,7 @@ public class LogicScript : MonoBehaviour
             numberOfGrades += 1;
             gradeSum += g;
         }
-        if (numberOfGrades < 10)
+        if (numberOfGrades <= 10)
         {
             behaviour = numberOfGrades;
             behaviourText.text = "Condotta: " + numberOfGrades.ToString();
@@ -108,7 +125,7 @@ public class LogicScript : MonoBehaviour
     {
         Time.timeScale = 1;
         gameIsPaused = false;
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         AudioManager.instance.PlayMusic("Level");
     }
 
@@ -125,6 +142,14 @@ public class LogicScript : MonoBehaviour
         SceneManager.LoadScene("Menu");
         Time.timeScale = 1f;
         gameIsPaused = false;
+    }
+
+    public void NextLevel()
+    {
+        Time.timeScale = 1f;
+        gameIsPaused = false;
+        SceneManager.LoadScene("Level" + PlayerStats.instance.currentLevel);
+        AudioManager.instance.PlayMusic("Level");
     }
 
 
