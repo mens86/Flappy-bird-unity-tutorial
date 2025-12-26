@@ -2815,6 +2815,10 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 3c7f52d6a1d128c4a9835c793eb32bf3, type: 3}
     volume: 0.7
     pitch: 1
+  - name: pop
+    clip: {fileID: 8300000, guid: cd563b07a329b0c4ebb4f3ae494a94cf, type: 3}
+    volume: 0.7
+    pitch: 1
   musicSource: {fileID: 2093272939}
   sfxSource: {fileID: 2093272938}
 --- !u!4 &2093272937

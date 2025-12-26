@@ -8,6 +8,7 @@ public class BirdScript : MonoBehaviour
     public LogicScript logic;
     public bool birdIsAlive = true;
     public Animator animator;
+    public GameObject smokeOnJump;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -24,6 +25,9 @@ public class BirdScript : MonoBehaviour
             myRigidBody.linearVelocity = new Vector2(0, 1) * flapStrenght;
             AudioManager.instance.PlaySFX("flap");
             animator.SetTrigger("bounceAnim");
+            Vector3 smokePosition = new Vector3(gameObject.transform.position.x - 5, gameObject.transform.position.y + 2, 0);
+            Instantiate(smokeOnJump, smokePosition, gameObject.transform.rotation);
+
         }
     }
 

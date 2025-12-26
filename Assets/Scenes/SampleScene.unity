@@ -2999,6 +2999,7 @@ MonoBehaviour:
   logic: {fileID: 1242895939}
   birdIsAlive: 1
   animator: {fileID: 1782017314}
+  smokeOnJump: {fileID: 6403252182692130976, guid: aa21c51f74eb4dd49acaf073b46867b6, type: 3}
 --- !u!95 &1782017314
 Animator:
   serializedVersion: 7
